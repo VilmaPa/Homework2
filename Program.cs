@@ -1,5 +1,4 @@
-﻿using Homework2.Helpers;
-using Homework2.Models;
+﻿using Homework2.Models;
 using System;
 
 namespace Homework2
@@ -25,9 +24,6 @@ namespace Homework2
                     
                     switch (command)
                     {
-                        //case "balance":
-                        //    Console.WriteLine($"{Message.currentBalance}{user.Balance}\n{Message.nextCommand}");
-                        //    break;
                         case "add":
                             Console.WriteLine("Please, enter what type of item you want to add : cup, candy or book and amount.e g 'cup 10' ");
                             string itemTypeAndAmount = Console.ReadLine().Trim().ToLower();
@@ -47,11 +43,6 @@ namespace Homework2
                         case "list":
                             shop.ListItems();
                             break;
-                        //case "topup":
-                        //    var amount = decimal.Parse(textArr[1]);
-                        //    user.AddMoney(user, amount);
-                        //    Console.WriteLine($"{Message.addedMoney + amount}{Message.nextCommand}");
-                        //    break;
                         case "exit":
                             commandExit = false;
                             break;
@@ -65,48 +56,10 @@ namespace Homework2
                 }
                 catch (Exception e)
                 {
-                    //startApp = false;
                     Console.WriteLine(e.Message);
-                //    command = Console.ReadLine();
-                //    var number = Decimal.Parse(command);
-                //    Console.WriteLine($"NUMBER IS {number}");
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine($"Something gone wrong {ex.Message} please try again");
                 }
             }
 
-            //var shop = new Shop();
-            //shop.ListItems();
-            //shop.Buy("ItemName", 50);
-            //shop.LoadItems("ItemName", 50);
-            //var item = new Item()
-            //{
-            //    Name = "CUP",
-            //    Price = 5,
-            //    Quantity = 10
-            //};
-            //var item = new Candy()
-            //{
-            //    Name = "BEANS",
-            //    Price = 2,
-            //    Quantity = 20
-            //};
-            //var Cup1 = new Cup()
-            //{
-            //    Name = "RED",
-            //    Price = 10,
-            //    Quantity = 6
-            //};
-            //var Book1 = new Book()
-            //{
-            //    Name = "STORY",
-            //    Price = 15,
-            //    Quantity = 10
-            //};
-
-            //var sum = CalculationLibrary.SumNumbers(4, 5);
         }
     }
 }
