@@ -1,10 +1,18 @@
-﻿using System;
+﻿using Homework2.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Homework2.Models
 {
     public class Shop
     {
+        private ILogger _logger;
+
+        public Shop(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         private readonly object name;
 
         public string Name { get; set; }
@@ -18,12 +26,12 @@ namespace Homework2.Models
             {
                 if (item.Quantity > 0)
                 {
-                    Console.WriteLine($"Product name: { item.Name}, price: { item.Price}, quantity in the shop {name}: { item.Quantity}");
+                    _logger.Write($"Product name: { item.Name}, price: { item.Price}, quantity in the shop {name}: { item.Quantity}");
                 }
             }
         }
 
-        public string  AddItems(string itemName, int amount)
+        public void  AddItems(string itemName, int amount)
         {
             foreach (var item in Items)
             {
@@ -31,25 +39,29 @@ namespace Homework2.Models
                 {
                     item.Quantity += amount;
 
-                    return "Succesfully added.";
+                    _logger.Write("Succesfully added.");
                 }
             }
-            return "No such product was found."; 
+            _logger.Write("No such product was found."); 
         }
 
 
-        public string Buy(string itemName, int amount)
+        public void Buy(User user, string itemName, int amount)
         {
             foreach (var item in Items)
             {
                 if (((item.Name).ToLower() == itemName)&&(item.Quantity >= amount))
                 {
-                    item.Quantity -= amount;
+                    if (user.Balance >= amount * item.Price)
+                    {
+                        item.Quantity -= amount;
+                        user.Balance -= amount * item.Price;
 
-                    return "Succesfully bought.";
+                        _logger.Write( "Succesfully bought.");
+                    }
                 }
             }
-            return "There are less items than you want to buy.";
+            _logger.Write("There are less items than you want to buy or balance is not enough. Please check.");
         }
     }
 }
